@@ -2,7 +2,7 @@
 
 This file owns **where** a colony may exist, **when** you may Direct it, and the **state machine** that keeps an undocked hull from hiding behind the dashboard.
 
-Locked laws: U2, U4, U5, U6, U7 in [02-locked-rules.md](02-locked-rules.md). Verbs and API sketch: [06-handoff-sketch.md](06-handoff-sketch.md).
+Locked laws: U2, U4, U5, U6, U7, U16 in [02-locked-rules.md](02-locked-rules.md). Verbs and API sketch: [06-handoff-sketch.md](06-handoff-sketch.md). Field intel: [08-origin-and-founding.md](08-origin-and-founding.md).
 
 ## Intent
 
@@ -27,6 +27,10 @@ A “handful of inhabitable planets” `[LEANING]`: not every rock is a colony s
 
 Bookmarks, probes, and bloom pins do **not** grant a colony claim.
 
+### Who is on the planet `[LOCKED: U16]`
+
+Low-sec local may show that a planet is **claimed**. It does **not** show **which Residual**. Identity is a **Contact**, written on a field **Hunt** (chase / capture / execute, or catch-while-fleeing). **Hold** (contesting a mine or clinic) does not name anyone. Targeted foothold raids require a Contact. High-sec garden PvP does not write raid-unlocking Contacts. Canonical: [08-origin-and-founding.md](08-origin-and-founding.md).
+
 ## One claim `[LOCKED]`
 
 Nakama (or equivalent) stores `activeColonyId` (nullable). Claim fails if it is set. Relocate clears it, then sets the new one.
@@ -43,6 +47,7 @@ There is no “high-sec city plus low-sec extractor.” If you want the better p
 **Effects**
 
 - Spins up or attaches the ASIWars personal-base instance.
+- Station HR issues the **licensed founding kit** (U13): two baseline NeuralSynced Users on **Closed** factory Models (U15). Not a Residual clone. Not natives you captured. Distill → Open is the graduation item. See [08-origin-and-founding.md](08-origin-and-founding.md).
 - Limited resource pools and Blank quality.
 - Long protection timers. Ground PvP light/optional.
 - **Dock & Focus Colony** becomes legal from that station.
@@ -61,7 +66,7 @@ Players who only want a colony sim **may stay here forever**. That is on-purpose
 
 - Colony instance attaches to that planet / plot.
 - Full contested mining + destructive contests.
-- Better yields and Blank quality.
+- Better yields and **Unenrolled** native quality (U14 Clinic is the growth loop; licensed kit is not re-issued).
 - **Dock & Focus Colony** is legal **only** while docked at **that** outpost.
 
 **Take it over** means: build the outpost (flag → build cycle) **or** capture / inherit one. Exact capture math is `[GAME]` Spacesim compact-outposts. Universe law only requires the link.
@@ -134,7 +139,7 @@ Raids and site contests resolve whether you are Focused or not. Protection timer
 Expected, especially in low-sec.
 
 1. Dock at legal berth (or accept a worse, riskier pack-out `[OPEN]`).
-2. Evacuate: select Vessels, Models, resources into hangar (capacity, time, cost).
+2. Evacuate: select Vessels, **Open** Models, resources into hangar (capacity, time, cost). **Closed** Models unseat and stay (U15).
 3. Claim slot clears. Plot scars and may remain as wreckage.
 4. Transit: assets are cargo / hangar. Gankable if you undock.
 5. Claim a new planet under U4/U5.

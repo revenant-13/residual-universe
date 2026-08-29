@@ -10,8 +10,9 @@ Naming principle (from ASIWars, now universe-wide): every mechanic noun should c
 | --- | --- | --- | --- |
 | **Residual** `[LOCKED]` | The player. Leftover superintelligence fragment. No body. | Implicit “pilot” / character | Residual / identity |
 | **Director** `[LOCKED]` | Role title while focused on a colony. Same being. | n/a | Director dashboard |
-| **WellStream™** `[LEANING]` | In-fiction implant + stewardship platform. Ground UI chrome. | n/a | WellStream™ / Neighbor |
-| **Fork** `[GAME]` | Optional prestige copy of a Residual (ASIWars, post-MVP). | n/a | Prestige layer |
+| **WellStream™** `[LEANING]` | Stewardship **platform** that talks to the chip. Director chrome, clinic, licensed-kit paperwork. | n/a | WellStream™ / Neighbor |
+| **NeuralSync** `[LEANING]` | The **chip** (Neuralink-class). Holds the loadable Model. WellStream is the service; NeuralSync is the implant. Name may iterate; the concept is `[LOCKED]`. | n/a (pod implants deferred) | Chip / Model seat |
+| **Fork** `[GAME]` | Optional prestige copy of a Residual (ASIWars, post-MVP). Not the founding roster (U13). | n/a | Prestige layer |
 
 Do not introduce a second player noun (“Captain,” “Operator”) in design docs. UI slang on the space side (“pilot,” “capsuleer-class hull”) is flavor.
 
@@ -20,10 +21,15 @@ Do not introduce a second player noun (“Captain,” “Operator”) in design 
 | Term | Meaning |
 | --- | --- |
 | **Vessel** `[LOCKED]` | A human unit. Mechanical term. UI may say Users / Residents. |
-| **Blank** `[LOCKED]` | Low-tier wild / starter human. Flavor: Base Model. |
+| **Licensed User** `[LOCKED]` (U13) | Station-issued starter Vessel. Baseline Blank, already NeuralSynced, seated on a **Closed** factory Model (U15). Not a Residual clone. High-sec founding kit. Body may Evacuate; Closed seat may not. |
+| **Unenrolled** `[LOCKED]` (U14) | Native without a chip. Lives on low-sec planets. Not Protocolable until Clinic. |
+| **Blank** `[LOCKED]` | Low-tier human (licensed starter or wild). Flavor: Base Model. |
 | **Tuned / Fine-tune** `[LOCKED]` | Trained-up Blank. Fine-tune = you trained it (pedigree). |
 | **Prime** `[LOCKED]` | High-trait Vessel. Mostly stolen or slowly trained. |
 | **Model** `[LOCKED]` | Loadable **weights** artifact: decision tree + weight allocation + trained skills. Separable from the human. Traded on the Model Hub. |
+| **Closed Model** `[LOCKED]` (U15) | Proprietary WellStream original. High-sec park license only. Cannot Evacuate, cannot Hub as itself. Factory seats: `wellstream-labor-v0` / `wellstream-guard-v0`. |
+| **Open Model** `[LOCKED]` (U15) | Player-owned original (or further Distill). Loads anywhere. The high-sec graduation item. |
+| **Distill** `[LOCKED]` (U15 / ASIWars D19) | Lossy copy. Distill of **Closed** writes a **new Open original** you own. Closed teacher stays. Distill of Open stays Open and worse. |
 | **Protocol** `[LOCKED]` | Live nudge: push–pull on priors. Crafted, equippable. Model *allocates*; Protocol *steers*. |
 | **Zone** `[LOCKED]` | Spatial priority (Collection, Attention, Defense, Attractor, Repulsor…). Vessels gravitate; they are not ordered to a tile. |
 | **Inference** `[LEANING]` | One resolved nudge attempt (success/fail roll). |
@@ -31,11 +37,16 @@ Do not introduce a second player noun (“Captain,” “Operator”) in design 
 | **Obedience** `[LOCKED]` (ASIWars D30) | How reliably a Vessel follows intent vs its own Drives. |
 | **VRAM** `[LOCKED]` (ASIWars D17/D31) | Per-Vessel complexity budget and colony hosting pool (compute hardware). |
 | **Checkpoint** `[LOCKED]` (ASIWars D21) | Pre-emptive Model backup. Insures weights, not the body. |
-| **Distill** `[LOCKED]` (ASIWars D19) | Lossy copy of a Model. Originals stay premium. |
-| **Offboarding** | Death/removal euphemism. |
-| **Reassignment / onboarding** | Trade/transfer euphemism. Never “sale of people” in UI. |
 
-Provenance tags stay ASIWars `[GAME]`: `WildBorn` / `Trained` / `Stolen` (hot goods).
+| **Offboarding** | Death/removal euphemism. |
+| **Reassignment / placement / rehoming** | Market transfer euphemism for already-chipped Users. Never “sale of people” in UI. Not the Clinic verb. |
+| **Clinic / Onboard** `[LOCKED]` (U14) | Enroll an Unenrolled native onto NeuralSync. Volunteer only. Refusal legal. |
+| **Contact** `[LOCKED]` (U16) | Intel that names another Residual. Written on a **Hunt** (chase / capture / execute, or catch-while-fleeing). Required to targeted-raid their foothold. **Hold** (node contest) writes none. |
+| **Hold** `[LOCKED]` (U16) | Contest a node (site pool, clinic basin). Anonymous scrap. You came for the goods. |
+| **Hunt** `[LOCKED]` (U16) | Pursue people, not the node. Writes Contact + replay. |
+| **Flee** `[LOCKED]` (U16) | Cede the node. Catchable. Caught = Hunt. |
+
+Provenance tags stay ASIWars `[GAME]`: `WildBorn` (clinic or wild pedigree) / `Trained` / `Stolen` (hot goods). Licensed high-sec starters are not `Stolen`; whether they keep a distinct license tag after Evacuate is `[OPEN]` ([07 O17](07-open-questions.md)).
 
 Capture vs kill (weights rule) stays ASIWars `[GAME]`: killed → salvage Model at a loss; captured → Model lost to the enemy. Universe copy may use it; do not re-tune it here.
 
@@ -47,8 +58,10 @@ Capture vs kill (weights rule) stays ASIWars `[GAME]`: killed → salvage Model 
 | **Inhabit** | Fantasy synonym for holding a claim. Not a second mechanic. |
 | **Focus** | Enter full Director interaction. Requires docked-for-full-focus (U6). |
 | **Return (to Ship)** | Leave Focus. Client back to space. Hull still docked until you undock. |
-| **Evacuate** | Pack Vessels / Models / resources into hangar, drop or abandon the claim, accept transit risk. |
+| **Evacuate** | Pack Vessels, **Open** Models, resources into hangar. **Closed** Models unseat and stay (U15). |
+| **Distill** | Bake a lossy Open original from a Closed teacher (high-sec game) or from an Open (later). Ground-owned. |
 | **Relocate** | Evacuate (or abandon) + Claim elsewhere. One-claim rule still holds. |
+| **Onboard** | Clinic enrollment of an Unenrolled native (U14). Ground-owned sim; universe names the verb. Not market reassignment. |
 
 ## Space: keep the native words
 
@@ -102,6 +115,10 @@ When an ASIWars doc says… write Residual Universe as…
 - **Claim** (colony) vs **claimCompact** / loot claim in Spacesim rifts. Keep the verb qualified: **Claim planet** vs **claim loot**.
 - **Station** (NPC) vs **outpost** (player). Only the latter gates low-sec colonies.
 - **Focus** (Director mode) vs camera focus / lock. UI: **Dock & Focus Colony**.
+- **Onboard** (Clinic, U14) vs market **reassignment**. Never use “onboarding” for selling Users.
+- **WellStream™** (platform) vs **NeuralSync** (chip). Do not treat them as synonyms in design docs.
+- **Closed Model** vs **Open Model**. “Factory Model” in old copy means Closed. Do not Evacuate Closed.
+- **Contact** (U16 intel) vs space **lock** / camera focus. UI: **Contact** for the named Residual.
 
 ## Currency layers `[LEANING]`
 

@@ -2,7 +2,7 @@
 
 Canonical **shared design layer** for [Spacesim](https://github.com/revenant-13/spacesim) and [ASIWars](https://github.com/revenant-13/asiwars).
 
-This repo is the **authority on universe-level rules**: who the player is, how space and ground relate, claim/focus/evacuate, the one-colony cap, high-sec vs low-sec planetary law, and the resource bridge. Project-specific implementation (combat ticks, Protocol math, Voxelize instances, Colyseus rooms) stays in the respective game docs.
+This repo is the **authority on universe-level rules**: who the player is, how a colony is born, how space and ground relate, claim/focus/evacuate, the one-colony cap, high-sec vs low-sec planetary law, and the resource bridge. Project-specific implementation (combat ticks, Protocol math, Voxelize instances, Colyseus rooms) stays in the respective game docs.
 
 It is **not** a code merge. The two engines stay separate. The merge that matters first is narrative, terminology, locked rules, and the handoff surface.
 
@@ -25,6 +25,7 @@ Start here, then the numbered files. Each file is independently editable.
 | [docs/05-resource-bridge.md](docs/05-resource-bridge.md) | Ground outputs → space industry; stations as industrializers |
 | [docs/06-handoff-sketch.md](docs/06-handoff-sketch.md) | Claim / Focus / Return / Evacuate verbs and contracts |
 | [docs/07-open-questions.md](docs/07-open-questions.md) | What is still undecided at universe level |
+| [docs/08-origin-and-founding.md](docs/08-origin-and-founding.md) | Founding myth, licensed kit, volunteer clinic, Closed/Open Models, field Contacts, sequenced goal |
 
 ## Status legend
 
@@ -38,7 +39,7 @@ Every universe claim is tagged so agents and humans know what they may change:
 ## Authority split
 
 ```
-residual-universe     universe identity, claim law, focus/security, resource bridge verbs
+residual-universe     universe identity, origin/founding, claim law, focus/security, resource bridge verbs
 spacesim docs         space combat, navigation, markets, outpost *implementation*, bloom windows
 asiwars docs          Protocols, Models, Vessels, Zones, raids, scarring, deterministic sim
 ```
@@ -71,4 +72,4 @@ Code and schema stubs live in the game repos. This repo only specifies the contr
 
 ## Source conversation
 
-Design lock from the shared-universe conversation (2026-08-26): [AI Space-Ground Hybrid Game](https://grok.com/share/bGVnYWN5_ad47469d-2beb-4dd1-be63-b8851ef4a8d3).
+Design lock from the shared-universe conversation (2026-08-26): [AI Space-Ground Hybrid Game](https://grok.com/share/bGVnYWN5_ad47469d-2beb-4dd1-be63-b8851ef4a8d3). Origin and founding (U13/U14, licensed kit, volunteer clinic, sequenced goal) locked 2026-08-28 in [docs/08-origin-and-founding.md](docs/08-origin-and-founding.md).

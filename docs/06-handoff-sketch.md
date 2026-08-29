@@ -80,10 +80,32 @@ Preconditions: `[LEANING]` must be docked at legal berth for a clean pack-out. E
 
 Effects:
 
-- Select Vessels, Models, resources into hangar (caps, time, cost `[OPEN]`).
+- Select Vessels, **Open** Models, resources into hangar (caps, time, cost `[OPEN]`).
+- **Closed** Models (U15) cannot be selected. Seated Closed unloads and remains with the park license / teardown. Licensed Users may still pack as bodies (empty chips until you load Open).
 - Clear `activeColonyId`, `linkedOutpostId` bind, `focus`.
 - Colony instance tears down or remains as abandoned wreckage `[LEANING]` wreckage linger.
-- Assets now follow cargo/hangar law. Gankable once undocked.
+- Assets now follow cargo/hangar law. Gankable once undocked. Closed files never become hangar cargo.
+
+### Onboard native (Clinic)
+
+**Intent:** Enroll an **Unenrolled** native onto NeuralSync. Universe law U14. Ground owns the sim.
+
+Preconditions:
+
+- Active colony exists.
+- Claim is on a planet that has Unenrolled population (low-sec richer; high-sec licensed kit does **not** use this verb).
+- Native is Unenrolled (no chip).
+- Full Director if the action is live Clinic work; async standing clinic orders are `[LEANING]` legal under U7.
+
+Effects:
+
+- Native volunteers (or refuses). Refusal is a legal outcome — they stay Unenrolled, not Protocolable.
+- On success: chip seated, factory or assigned Model loaded, provenance `WildBorn`, now a Vessel on the roster (VRAM/host cap still applies — `[GAME]` ASIWars).
+- Never forcibly chips. Never targets another Residual’s already-chipped User (that is raid/steal).
+
+Fails closed: high-sec licensed plot with no Unenrolled, already chipped, host cap, glue down.
+
+ASIWars implements when the Clinic phase is cited. This repo only names the verb and the preconditions.
 
 ### Resource / Vessel transfer
 
@@ -100,7 +122,7 @@ Async **standing export** into the outpost/station hangar is allowed so roamers 
 
 ### Status query
 
-Read-only from either client: colony condition, protection timer, live contest, outpost HP, pending transfers. Menu-first. Agent-legal.
+Read-only from either client: colony condition, protection timer, live contest, outpost HP, pending transfers, **Contacts** (U16 — named Residuals your **Hunts** wrote, with replay refs). Menu-first. Agent-legal. Does not list unnamed claim holders or anonymous Holds.
 
 ## Client mode switch `[LEANING]`
 
@@ -126,9 +148,9 @@ ASIWars command/query API must distinguish:
 | **Async** | Colony exists; Residual may be anywhere |
 | **Read / replay** | Always, if you own or are raid-watching per ASIWars rules |
 
-Full Director examples: layout, training programs, raid commit, Model workshop, Zone paint.
+Full Director examples: layout, training programs, raid commit, Model workshop, Zone paint, **Clinic / Onboard**.
 
-Async examples `[LEANING]`: standing-order tweaks, one-shot Protocol, abort contest, Evacuate **request** (may still need a berth to complete).
+Async examples `[LEANING]`: standing-order tweaks, one-shot Protocol, abort contest, Evacuate **request** (may still need a berth to complete), standing clinic attract (not live enrollment).
 
 If glue is down, fail closed: no Focus, colony keeps last standing orders.
 
@@ -150,6 +172,7 @@ universe.claim_planet
 universe.focus_colony
 universe.return_to_ship
 universe.evacuate
+universe.onboard_native
 universe.transfer_uplift
 universe.transfer_downlift
 universe.status
@@ -175,3 +198,6 @@ This is the first **merged** playable moment. It does not need a monorepo.
 - Two colonies.
 - Focus from space while undocked.
 - Planet-unique faucet with no consumer recipe.
+- Hostile NeuralSync / forced Clinic.
+- Residual clone as the founding roster.
+- Evacuate or load **Closed** Models outside high-sec.

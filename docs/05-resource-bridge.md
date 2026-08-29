@@ -43,7 +43,7 @@ Direction only:
 | --- | --- | --- |
 | Unique planetary mats | T2 / special bills, sinks | The point of U9. New ids need a consuming recipe **before** they extract (Spacesim faucet gate). |
 | Limited common PI | Overlap with blooms | High-sec commons stay trash. |
-| Models (weights) | Tradeable / loadable; not a turret stat | Cross-layer as cargo-like artifacts at the berth. Combat power stays ship fittings. |
+| Models (weights) | Tradeable / loadable; not a turret stat | **Open** Models only (U15). Closed factory files never enter a hangar. Combat power stays ship fittings. |
 | Vessels | Not space crew `[LOCKED]` | Humans do not board hulls as DPS. Evacuation hangar is **storage in transit**, then back to a colony or market. |
 | Credits / bits | Soft tickers | Convert only at a legal berth. Rate `[OPEN]`. |
 
