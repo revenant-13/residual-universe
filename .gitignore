@@ -1,0 +1,13 @@
+# Blender autosaves
+*.blend1
+*.blend2
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+
+# OS
+.DS_Store
+Thumbs.db

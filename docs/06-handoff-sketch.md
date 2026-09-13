@@ -14,9 +14,9 @@ Held in Nakama (or equivalent). Not in a Colyseus room and not in a Voxelize wor
 | `activeColonyId` | Null or one. Enforces U2. |
 | `colonySecBand` | `high` \| `low` (null later). |
 | `planetId` / `systemId` | Where the claim sits. |
-| `linkedOutpostId` | Required for low-sec claim/Focus. |
+| `linkedOutpostId` | Required for low-sec claim/Focus. Later `[LEANING]`: may point at a Hive-owned outpost; colony stays personal. |
 | `docked` | Mirrored from space dock commit. |
-| `berthKind` | `npc-station` \| `linked-outpost` \| `none`. |
+| `berthKind` | `npc-station` \| `linked-outpost` \| `none`. Hive **Office** is not a berth. |
 | `focus` | `true` only if docked at a **legal** berth for this claim. |
 | `hangarBridge` | Pending uplifts/downlifts. |
 
@@ -113,12 +113,22 @@ ASIWars implements when the Clinic phase is cited. This repo only names the verb
 
 | Direction | Typical payload |
 | --- | --- |
-| Uplift | Planetary mats, maybe Credits→bits, Models as artifacts |
+| Uplift | **Sync Traces**, maybe Open files (Hub cargo), Credits→bits |
 | Downlift | Tools, compute hardware, ammo analog, food analog, bits→Credits |
 
-Vessels in hangar are **in transit**, not crew (U9). They do nothing for DPS.
+Vessels in hangar are **in transit**, not crew (U9). They do nothing for DPS. Fitted LoRAs are **not** hangar cargo — they ride the Kernel (U17).
 
-Async **standing export** into the outpost/station hangar is allowed so roamers are not a bottleneck. High-sec export remains trash-capped.
+Async **standing export** into the outpost/station hangar is allowed so roamers are not a bottleneck. High-sec export remains instructional / trash-capped.
+
+### Uplink traces
+
+**Intent:** Move **Sync Traces** (unique good) from the plot to the hangar. Universe law U17. Ground owns emission; space owns LoRA manufacture.
+
+Preconditions: legal berth, live Closedex Core (`[GAME]` ASIWars). Closed Models never uplink. Open files may still vault/Hub — that is not the unique export.
+
+Effects: traces hit hangarBridge. Not Evacuate.
+
+LoRA manufacture / Kernel dock-fit is **Spacesim**, after hangar. Not a ground verb.
 
 ### Status query
 
@@ -129,11 +139,11 @@ Read-only from either client: colony condition, protection timer, live contest, 
 Two clients (or two modes in one shell) is fine. The universe does not require a single WebGL canvas.
 
 ```
-[ Spacesim client ]  --dock+focus-->  [ ASIWars console ]
-[ Colyseus room  ]                    [ Voxelize instance + sim API ]
-         \                               /
-          \                             /
-               [ Nakama / glue ]
+[ NeuralSync space client ]  --dock+focus-->  [ Closedex (ground) ]
+[ Colyseus room           ]                    [ Voxelize instance + sim API ]
+         \                                        /
+          \                                      /
+                    [ Nakama / glue ]
 ```
 
 A crude prototype is enough to validate U6: dock in Spacesim → set focus flag → open Director → issue one Protocol → Return → see mock mats in hangar.
@@ -148,7 +158,7 @@ ASIWars command/query API must distinguish:
 | **Async** | Colony exists; Residual may be anywhere |
 | **Read / replay** | Always, if you own or are raid-watching per ASIWars rules |
 
-Full Director examples: layout, training programs, raid commit, Model workshop, Zone paint, **Clinic / Onboard**.
+Full Director examples: layout, training programs, raid commit, Model workshop, Zone paint, **Clinic / Onboard**, **Uplink traces**.
 
 Async examples `[LEANING]`: standing-order tweaks, one-shot Protocol, abort contest, Evacuate **request** (may still need a berth to complete), standing clinic attract (not live enrollment).
 
@@ -175,6 +185,7 @@ universe.evacuate
 universe.onboard_native
 universe.transfer_uplift
 universe.transfer_downlift
+universe.uplink_traces
 universe.status
 ```
 
@@ -185,8 +196,8 @@ Payloads carry `residualId`, `planetId` / `colonyId`, `berthId`, idempotency key
 1. Meta stub: one Residual, one colony flag, focus boolean (file or Nakama storage).
 2. Spacesim: docked action **Inhabit / Focus Colony** calls the stub.
 3. ASIWars: refuse full commands unless stub says focused; accept async always.
-4. Mock uplift: Focus → tick a Collection Zone → Return → grant a hangar stack the space industry already consumes (or a tagged dummy).
-5. Only then: real unique ids, outpost bind, Evacuate.
+4. Mock uplink: Focus → train → Return → grant a hangar `sync-trace` stack Spacesim already consumes.
+5. Only then: real unique ids, outpost bind, Evacuate, ASIWars Trace emitter.
 
 This is the first **merged** playable moment. It does not need a monorepo.
 
@@ -195,9 +206,10 @@ This is the first **merged** playable moment. It does not need a monorepo.
 - Unified engine.
 - Walking Residual on voxels.
 - Crew-on-hull.
-- Two colonies.
+- Two colonies. Hive membership is not a second claim (O12).
 - Focus from space while undocked.
-- Planet-unique faucet with no consumer recipe.
+- LoRA faucet with no Kernel consumer.
 - Hostile NeuralSync / forced Clinic.
 - Residual clone as the founding roster.
 - Evacuate or load **Closed** Models outside high-sec.
+- Unique-mat north star beside LoRAs.
